@@ -10,8 +10,6 @@ public class EShoppingApplication {
 	public static void main(String[] args) {
 		ApplicationContext cxt = SpringApplication.run(EShoppingApplication.class, args);
 		
-		ArticleRepository articleRepository =cxt.getBean(ArticleRepository.class);
-		articleRepository.save(new Article("titre 1","core "));
 	
 		
 	}

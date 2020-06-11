@@ -18,7 +18,7 @@ public class TestController {
 		
 		
 		
-		return "Acceuil";
+		return "Acceuil.xhtml";
 	}
 	
 	
