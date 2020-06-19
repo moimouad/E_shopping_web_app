@@ -17,8 +17,7 @@ public class Car {
 
   public Car() {}
 
-  public Car(Long id, String brand, int year, String color) {
-    this.id = id;
+  public Car(String brand, int year, String color) {
     this.brand = brand;
     this.year = year;
     this.color = color;
