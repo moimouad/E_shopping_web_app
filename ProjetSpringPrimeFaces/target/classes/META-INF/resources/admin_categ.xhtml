@@ -80,12 +80,16 @@
   </p:dialog>
   
   <p:dialog id="updateItemAmount" header="Update Existing Item Amount" widgetVar="updateitemDialog" height="100px" resizable="false">
+       <h:form>
      <p:panelGrid columns="2" columnClasses="label,value">
+
         <h:outputLabel value="New name:" />
-        <h:inputText value = "#{categoriesView.namee}" id = "user" a:placeholder="Username" required="true" requiredMessage="name is required" />
+        <h:inputText value="#{categoriesView.namee}"/>
         <p:commandButton id="confirmEdit" value="OK" action="#{categoriesView.updateExistingProduct()}" oncomplete="PF('updateitemDialog').hide()" icon="ui-icon-check"/>
         <p:commandButton id="cancelEdit" value="Cancel" onclick="PF('updateitemDialog').hide()" icon="ui-icon-cancel"/> 
+
      </p:panelGrid>
+          </h:form>
    </p:dialog>
 <!-- Fin Body !!! -->
 

@@ -120,16 +120,13 @@ public class CategoriesView implements Serializable {
 	        }
 
 	        // call EJB to delete the product
-	        try {
-	        	System.out.println(namee);
+        
+	        	System.out.println("Value: "+namee);
 	        	gnome.setName(namee);
 	        	CategoryRepository accRepo = Context.getContext().getBean(CategoryRepository.class);
 			    accRepo.save(gnome);
 	            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Admin: Category Update successfully.", null));
 	            redirect("admin_categ.xhtml");
-	        } catch (Exception e) {
-	            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Admin: Category Update was unsuccessful.", null));
-	        }
 
 	    }
 		  
