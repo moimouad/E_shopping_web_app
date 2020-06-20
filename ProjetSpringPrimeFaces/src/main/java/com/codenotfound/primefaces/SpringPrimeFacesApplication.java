@@ -3,15 +3,21 @@ package com.codenotfound.primefaces;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.codenotfound.primefaces.model.Category;
+import com.codenotfound.primefaces.repository.CategoryRepository;
+
 @SpringBootApplication
 public class SpringPrimeFacesApplication {
 
   public static void main(String[] args) {
     
     Context.setContext(SpringApplication.run(SpringPrimeFacesApplication.class, args)) ;
-    
-    /*AccountRepository carRepo = context.getBean(AccountRepository.class);
-    carRepo.save(new Account("mouad","1234"));*/
+  
+    /* CategoryRepository carRepo = Context.getContext().getBean(CategoryRepository.class);
+    carRepo.save(new Category("Achraf"));
+    carRepo.save(new Category("Mouad"));
+   carRepo.save(new Category("Pants"));
+    */
     
   }
 }

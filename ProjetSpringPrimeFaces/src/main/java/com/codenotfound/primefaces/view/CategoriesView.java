@@ -10,14 +10,12 @@ import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 import com.codenotfound.primefaces.model.Category;
 import com.codenotfound.primefaces.repository.CategoryRepository;
 
 @Named
 @ViewScoped
 public class CategoriesView implements Serializable {
-
 
 	  private static final long serialVersionUID = 1L;
 
@@ -26,7 +24,6 @@ public class CategoriesView implements Serializable {
 
 	  private List<Category> categories;
 	  
-
 	  @PostConstruct
 	  public void init() {
 		  categories = categoriesRepository.findAll();

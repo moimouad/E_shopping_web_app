@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
   xmlns:h="http://java.sun.com/jsf/html"
   xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:c="http://java.sun.com/jstl/core"
   xmlns:p="http://primefaces.org/ui">
 
 <h:head>
@@ -23,9 +24,12 @@
 <h:body>
 
 <ul class="topnav">
-  <li><h:form><h:commandLink value="Home" action = "#" styleClass="active"></h:commandLink></h:form></li>
-  <li><h:form><h:commandLink value="T-shirts" action = "#"></h:commandLink></h:form></li>
-  <li><h:form><h:commandLink value="shoes" action = "#"></h:commandLink></h:form></li>
+
+  <li><h:form><h:commandLink value="Home" action = "#" styleClass="active"></h:commandLink></h:form></li>  
+  <c:forEach var="category" items="#{categoriesView.categories}">
+  	<li><h:form><h:commandLink value="#{category.name}" action = "#"></h:commandLink></h:form></li>
+  </c:forEach>
+  
   <li class="right" style="#{accountView.loggedin ? '' : 'display:none'}"><h:form><h:commandLink action="orders?faces-redirect=true" value = "orders" onclick="#"/></h:form></li>
   <li class="right" id="username" style="#{accountView.loggedin ? '' : 'display:none'}"><h:form><h:commandLink action="profile.xhtml" value = "#{accountView.username}"/></h:form></li>
   <li class="right" style="#{accountView.loggedin ? '' : 'display:none'}"><h:form><h:commandLink action="#{accountView.logout()}" value = "Logout" /></h:form></li>
@@ -37,22 +41,15 @@
 
 <!-- Debut Body !!! -->
 
-  <p:dataTable var="car" value="#{carsView.cars}">
+  <p:dataTable var="category" value="#{categoriesView.categories}">
     <p:column headerText="Id">
-      <h:outputText value="#{car.id}" />
+      <h:outputText value="#{category.id}" />
     </p:column>
 
-    <p:column headerText="Year">
-      <h:outputText value="#{car.year}" />
+    <p:column headerText="Name">
+      <h:outputText value="#{category.name}" />
     </p:column>
 
-    <p:column headerText="Brand">
-      <h:outputText value="#{car.brand}" />
-    </p:column>
-
-    <p:column headerText="Color">
-      <h:outputText value="#{car.color}" />
-    </p:column>
   </p:dataTable>
   
 <!-- Fin Body !!! -->
