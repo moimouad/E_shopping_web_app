@@ -29,34 +29,34 @@
 		<table style="width:100%">
 			<tr><td colspan="2">
 				<span class="fontawesome-user"></span>
-				<h:inputText value = "Username" id = "user" a:placeholder="Username"></h:inputText>
+				<h:inputText value = "#{accountView.username}" id = "user" a:placeholder="Username"></h:inputText>
 			</td></tr>
 			<tr><td colspan="2">
 				<span class="fontawesome-lock"></span>
-				<h:inputSecret value = "Password" id="pass" a:placeholder="Password"/>
+				<h:inputSecret value = "#{accountView.password}" id="pass" a:placeholder="Password"/>
 			</td></tr>
 		</table>
 			
 				<p style="display:inline;font-size:16px;color:#ffffff">Remember Me ?</p>
-			<h:selectBooleanCheckbox value = "Remmmmember" style="padding:50px;"></h:selectBooleanCheckbox>
+			<h:selectBooleanCheckbox value = "#{accountView.remember}" style="padding:50px;"></h:selectBooleanCheckbox>
 			<br/><br/>
 			
 			<h:outputText value = ""/>
-			<h:commandButton action = "#" value = "LOG IN" style="font-weight: bold;" onclick=""/>
+			<h:commandButton action = "#{accountView.login()}" value = "LOG IN" style="font-weight: bold;" onclick=""/>
 			<br/><br/>
-			<h:commandButton action = "#" value = "SIGN UP" style="font-weight: bold;"/>
+			<h:commandButton action = "#{accountView.redirect('signup.xhtml')}" value = "SIGN UP" style="font-weight: bold;"/>
 			
 			
 			
 		
 		<p style="color:red">
-			
+			#{accountView.errorMessage}
 			<h:messages style="color:red;margin:8px;" /> 
 			</p>
 	</h:form>
 </div>
 
-<center><h:form><h:commandLink action="#" value="Continue without login >>"></h:commandLink> </h:form></center>
+<center><h:form><h:commandLink action="items.xhtml" value="Continue without login >>"></h:commandLink> </h:form></center>
 </body>
 
 </html>
