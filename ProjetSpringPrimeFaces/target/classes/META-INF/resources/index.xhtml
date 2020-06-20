@@ -44,7 +44,7 @@
 			<h:outputText value = ""/>
 			<h:commandButton action = "#{accountView.login()}" value = "LOG IN" style="font-weight: bold;" onclick=""/>
 			<br/><br/>
-			<h:commandButton action = "#" value = "SIGN UP" style="font-weight: bold;"/>
+			<h:commandButton action = "#{accountView.redirect('signup.xhtml')}" value = "SIGN UP" style="font-weight: bold;"/>
 			
 			
 			

@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.codenotfound.primefaces.Context;
 import com.codenotfound.primefaces.model.Account;
 import com.codenotfound.primefaces.repository.AccountRepository;
 
@@ -26,8 +27,18 @@ public class AccountView implements Serializable {
 	  
 	  private String username;
 	  private String password;
+	  private String repassword;
+	  
 
-	  public String getUsername() {
+	  public String getRepassword() {
+		return repassword;
+	}
+
+	public void setRepassword(String repassword) {
+		this.repassword = repassword;
+	}
+
+	public String getUsername() {
 		return username;
 	}
 
@@ -46,13 +57,14 @@ public class AccountView implements Serializable {
 	@PostConstruct
 	  public void init() {
 	    Accounts = AccountRepository.findAll();
+	   
 	  }
 
-	  public List<Account> getCars() {
+	  public List<Account> getAccounts() {
 	    return Accounts;
 	  }
 	  
-		private void redirect(String page)
+		public void redirect(String page)
 		{
 			try{
 				FacesContext fc = FacesContext.getCurrentInstance();
@@ -63,11 +75,6 @@ public class AccountView implements Serializable {
 			}
 		}
 		
-		public void redirectto()
-		{
-			System.out.println("Happppppppppyyyyy !!!!!");
-			redirect("helloworld.xhtml");
-		}
 		
 		public void login() {
 			init();
@@ -77,5 +84,13 @@ public class AccountView implements Serializable {
 	            }
 	        }
 			
+		}
+		
+		public void signup() {
+			if (password.equals(repassword)) {
+				AccountRepository accRepo = Context.getContext().getBean(AccountRepository.class);
+			    accRepo.save(new Account(username,password));
+			    redirect("helloworld.xhtml");
+			}
 		}
 	}
