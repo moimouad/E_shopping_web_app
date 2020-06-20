@@ -14,9 +14,7 @@ import org.primefaces.event.UnselectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.codenotfound.primefaces.Context;
-import com.codenotfound.primefaces.model.Account;
 import com.codenotfound.primefaces.model.Category;
-import com.codenotfound.primefaces.repository.AccountRepository;
 import com.codenotfound.primefaces.repository.CategoryRepository;
 
 @Named
@@ -31,7 +29,14 @@ public class CategoriesView implements Serializable {
 	  private List<Category> categories;
 	  
 	  private Category selected;
+	  public String namee; 
 	  
+	public String getNamee() {
+		return namee;
+	}
+	public void setNamee(String namee) {
+		this.namee = namee;
+	}
 	public Category getSelected() {
 		return selected;
 	}
@@ -58,13 +63,14 @@ public class CategoriesView implements Serializable {
 	  
 	  public void onRowSelect(SelectEvent event) {
 	        this.selected = (Category) event.getObject();
+	        
 	        FacesContext context = FacesContext.getCurrentInstance();
 
 	        if (this.selected == null) {
 	            String msg = "No Category is selected!!";
 	            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, null));
 	        } else {
-	            System.out.println("Gnome is selected in userBean");
+	            System.out.println("Category is selected in CategoriesView");
 	            String msg = "Categoty selected: " + this.selected.getName();
 	            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null));
 	        }
@@ -99,6 +105,30 @@ public class CategoriesView implements Serializable {
 	            redirect("admin_categ.xhtml");
 	        } catch (Exception e) {
 	            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Admin: Product deletion was unsuccessful.", null));
+	        }
+
+	    }
+	    
+	    public void updateExistingProduct() {
+	        System.out.println("Updating Existing product... ");
+	        Category gnome = selected;
+	        FacesContext context = FacesContext.getCurrentInstance();
+	        // need to handel when gnome is null
+	        if (gnome == null) {
+	            System.out.println("Selected Category is null");
+	            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Admin: Selected Category Update is null. Bug!!! in the product list.", null));
+	        }
+
+	        // call EJB to delete the product
+	        try {
+	        	System.out.println(namee);
+	        	gnome.setName(namee);
+	        	CategoryRepository accRepo = Context.getContext().getBean(CategoryRepository.class);
+			    accRepo.save(gnome);
+	            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Admin: Category Update successfully.", null));
+	            redirect("admin_categ.xhtml");
+	        } catch (Exception e) {
+	            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Admin: Category Update was unsuccessful.", null));
 	        }
 
 	    }

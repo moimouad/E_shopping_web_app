@@ -4,6 +4,7 @@
   xmlns:h="http://java.sun.com/jsf/html"
   xmlns:f="http://xmlns.jcp.org/jsf/core"
   xmlns:c="http://java.sun.com/jstl/core"
+  xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
   xmlns:p="http://primefaces.org/ui">
 
 <h:head>
@@ -61,7 +62,7 @@
     </p:column>
     
     <p:column headerText="Edit" style="text-align: center">
-    	<p:commandButton id="edit"  value="Edit" icon="ui-icon-pencil"/>
+    	<p:commandButton id="edit"  value="Edit" onclick="PF('updateitemDialog').show()" icon="ui-icon-pencil"/>
     </p:column>
 
     <p:column headerText="Delete" style="text-align: center">
@@ -73,11 +74,21 @@
   
   <p:dialog id="deleteItem" header="Delete Existing Item Amount" widgetVar="deleteitemDialog" height="100px" resizable="false">
   	<p:panelGrid columns="2" columnClasses="label,value">
-    	<p:commandButton id="confirmDelete" value="OK" action="#{categoriesView.deleteExistingProduct()}" oncomplete="PF('deleteitemDialog').hide()" update=":availableGnomes" icon="ui-icon-check"/>
+    	<p:commandButton id="confirmDelete" value="OK" action="#{categoriesView.deleteExistingProduct()}" oncomplete="PF('deleteitemDialog').hide()"  icon="ui-icon-check"/>
         <p:commandButton id="cancelDelete" value="Cancel" onclick="PF('deleteitemDialog').hide()" icon="ui-icon-cancel"/>
     </p:panelGrid>
   </p:dialog>
   
+  <p:dialog id="updateItemAmount" header="Update Existing Item Amount" widgetVar="updateitemDialog" height="100px" resizable="false">
+     <p:panelGrid columns="2" columnClasses="label,value">
+        <h:outputLabel value="New name:" />
+        <h:inputText value = "#{categoriesView.namee}" id = "user" a:placeholder="Username" required="true" requiredMessage="name is required" />
+        <p:commandButton id="confirmEdit" value="OK" action="#{categoriesView.updateExistingProduct()}" oncomplete="PF('updateitemDialog').hide()" icon="ui-icon-check"/>
+        <p:commandButton id="cancelEdit" value="Cancel" onclick="PF('updateitemDialog').hide()" icon="ui-icon-cancel"/> 
+     </p:panelGrid>
+   </p:dialog>
+  
+  <h:inputText value = "#{categoriesView.namee}" id = "userr" a:placeholder="Username" required="true" requiredMessage="name is required" />
 <!-- Fin Body !!! -->
 
 <div class="heading">
