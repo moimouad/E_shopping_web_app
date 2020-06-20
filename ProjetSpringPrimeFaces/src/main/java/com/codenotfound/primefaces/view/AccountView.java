@@ -28,9 +28,18 @@ public class AccountView implements Serializable {
 	  private String username;
 	  private String password;
 	  private String repassword;
+	  public String errorMessage;
 	  
 
-	  public String getRepassword() {
+	  public String getErrorMessage() {
+		return errorMessage;
+	}
+
+	public void setErrorMessage(String errorMessage) {
+		this.errorMessage = errorMessage;
+	}
+
+	public String getRepassword() {
 		return repassword;
 	}
 
@@ -82,15 +91,36 @@ public class AccountView implements Serializable {
 	            if (Accounts.get(i).getUsername().equals(username) && Accounts.get(i).getPassword().equals(password)) {
 	            	redirect("helloworld.xhtml");
 	            }
+	            else {
+	            	errorMessage = "Username or Password incorrect !";
+	            }
 	        }
 			
 		}
 		
 		public void signup() {
 			if (password.equals(repassword)) {
-				AccountRepository accRepo = Context.getContext().getBean(AccountRepository.class);
-			    accRepo.save(new Account(username,password));
-			    redirect("helloworld.xhtml");
+				
+				init();
+				
+				boolean existed = false;
+				
+		        for (int i = 0; i < Accounts.size(); i++) {
+		            if (Accounts.get(i).getUsername().equals(username)) {
+		            	errorMessage = "Username already existed !";
+		            	existed = true;
+		            }
+		        }
+		        
+		        if (!existed) {
+		        	AccountRepository accRepo = Context.getContext().getBean(AccountRepository.class);
+				    accRepo.save(new Account(username,password));
+				    redirect("helloworld.xhtml");
+		        }
+				
+			}
+			else {
+				errorMessage = "You didn't retape well the password !";
 			}
 		}
 	}
