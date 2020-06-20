@@ -43,111 +43,13 @@
   <li><h:form><h:commandLink value="shoes" action = "#"></h:commandLink></h:form></li>
   <li class="right" style="#{accountView.loggedin ? '' : 'display:none'}"><h:form><h:commandLink action="orders?faces-redirect=true" value = "orders" onclick="#"/></h:form></li>
   <li class="right" id="username" style="#{accountView.loggedin ? '' : 'display:none'}"><h:form><h:commandLink action="profile.xhtml" value = "#{accountView.username}"/></h:form></li>
-  <li class="right" style="#{accountView.loggedin ? '' : 'display:none'}"><h:form><h:commandLink action="#{accountView.logout()}" value = "Logout" onclick = "logout('#{accountView.username}')"/></h:form></li>
+  <li class="right" style="#{accountView.loggedin ? '' : 'display:none'}"><h:form><h:commandLink action="#{accountView.logout()}" value = "Logout" /></h:form></li>
   <li class="right" style="#{accountView.loggedin ? 'display:none' : ''}"><h:form><h:commandLink action="index.xhtml" value = "Login/Signup"/></h:form></li>
   <li class = "right" style="#{accountView.loggedin ? '' : 'display:none'}"><h:form><h:commandLink action="#" onclick="#"><span class="fontawesome-shopping-cart"></span><h:outputText value = "not yet"></h:outputText></h:commandLink></h:form></li>
   
 </ul>
 
 
-
-<br/>
-
-
-
-<center>
-
-
-<h:form>
-    	   <h:inputText id="search_input" value="#" a:placeholder="Search.."/>
-    	   <h:commandButton value="SEARCH" action = "#" style="display:none"></h:commandButton>
- </h:form>
-
- <h:messages style="color:red;margin:8px;" global="true"/> 
- </center>
-
-<div id = "output">
-<ui:repeat var="items" value="#" varStatus="status">
-	<div class="responsive" id = "#">
-  		<div class="gallery">
-    		<a target="_blank" href="#" style="float:center;">
-      			<img src="#" style="height:200px;width:135px;float:center;margin-left:10%; margin-top:10%;overflow: hidden"/>
-   			</a>
-    		<div class="desc" id="#" style= "font-family: 'Cinzel', serif; width: auto;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" >#</div>
-   			<div>
-   			<br/>
-   			<div style="background-color:#CCCCCC;padding-top:20px">
-   		  <button class= "button" style = "display:inline;font-family: 'Days One', sans-serif;" id="#" onclick="#">
-	    			<span class="fontawesome-shopping-cart"></span>Add to Cart
-			</button>
-			
-		<h4 style="float:right;color:red;margin:10px;" class="price"># MAD</h4>
-    		
-	    		
-			    
-			
-			
-			<br/>
-			<br/>
-			<br/>
-			</div>
-    		</div>
-         </div>
-	</div>
-	
-</ui:repeat>
-
-</div>
-
-<div class="clearfix"></div>
-
-<div id="snackbar"></div>
-
- <div id="id01" class="w3-modal">
-    <div class="w3-modal-content w3-animate-top w3-card-4">
-      <header class="w3-container w3-teal"> 
-        <span onclick="document.getElementById('id01').style.display='none'" 
-        class="w3-button w3-display-topright">&times;</span>
-        <h2 id="here"></h2>
-        
-        
-      </header>
-      <div class="w3-container">
-      
-      <div class="gallerycontainer">
-
-<a class="thumbnail" href="#thumb"><img src="https://www.lamnia.com/images/sg-150-Shirts_and_T-Shirts.jpg" width="100px" height="66px" border="0" /><span><img src="https://www.lamnia.com/images/sg-150-Shirts_and_T-Shirts.jpg" /><br /></span></a>
-
-<a class="thumbnail" href="#thumb"><img src="https://www.lamnia.com/images/sg-150-Shirts_and_T-Shirts.jpg" width="100px" height="66px" border="0" /><span><img src="https://www.lamnia.com/images/sg-150-Shirts_and_T-Shirts.jpg" /><br /></span></a>
-
-<br />
-
-<a class="thumbnail" href="#thumb"><img src="https://www.lamnia.com/images/sg-150-Shirts_and_T-Shirts.jpg" width="100px" height="66px" border="0" /><span><img src="https://www.lamnia.com/images/sg-150-Shirts_and_T-Shirts.jpg" /><br /></span></a> 
-
-<a class="thumbnail" href="#thumb"><img src="https://www.lamnia.com/images/sg-150-Shirts_and_T-Shirts.jpg" width="100px" height="66px" border="0" /><span><img src="https://www.lamnia.com/images/sg-150-Shirts_and_T-Shirts.jpg" /><br /></span></a>
-
-<br />
-
-
-<h3>Please select quantity : </h3>
-</div>
-      
-      <h:form>
-        <h:inputHidden id="here1" value="#" />
-        <h:inputHidden id="status" value="#" />
-        <h:selectOneMenu styleClass = "selected" value = "# required = true" requiredMessage="Please select quantity"> 
-   			<f:selectItem itemValue = "1" itemLabel = "1" /> 
-   			<f:selectItem itemValue = "2" itemLabel = "2" /> 
-   			<f:selectItem itemValue = "3" itemLabel = "3" /> 
-		</h:selectOneMenu> 
-        <h:commandButton value = "OK" action = "#" style="float:right;background-color:#4CAF50;"></h:commandButton>
-      </h:form>
-      </div>
-     
-     
-    </div>
-  </div>
-<button onclick="topFunction();return false;" id="myBtn" title="Go to top">Go to Top</button>
 <br/>
 <div class="heading">
   <h6 class="title-text" style = "font-family: 'Days One', sans-serif;"><span>© 2020 Jee Projet</span></h6>
