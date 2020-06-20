@@ -38,7 +38,7 @@
 		</table>
 			
 				<p style="display:inline;font-size:16px;color:#ffffff">Remember Me ?</p>
-			<h:selectBooleanCheckbox value = "Remmmmember" style="padding:50px;"></h:selectBooleanCheckbox>
+			<h:selectBooleanCheckbox value = "#{accountView.remember}" style="padding:50px;"></h:selectBooleanCheckbox>
 			<br/><br/>
 			
 			<h:outputText value = ""/>
@@ -56,7 +56,7 @@
 	</h:form>
 </div>
 
-<center><h:form><h:commandLink action="#" value="Continue without login >>"></h:commandLink> </h:form></center>
+<center><h:form><h:commandLink action="items.xhtml" value="Continue without login >>"></h:commandLink> </h:form></center>
 </body>
 
 </html>
