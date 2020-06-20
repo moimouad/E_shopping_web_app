@@ -1,6 +1,15 @@
 package com.codenotfound.primefaces.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity(name = "Account")
 public class Account {
+	
+	@Id
+	@GeneratedValue
+	private Long id;
 	
 	private String username;
 	private String password;

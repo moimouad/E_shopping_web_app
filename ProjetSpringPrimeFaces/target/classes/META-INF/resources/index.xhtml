@@ -29,11 +29,11 @@
 		<table style="width:100%">
 			<tr><td colspan="2">
 				<span class="fontawesome-user"></span>
-				<h:inputText value = "Username" id = "user" a:placeholder="Username"></h:inputText>
+				<h:inputText value = "#{accountView.username}" id = "user" a:placeholder="Username"></h:inputText>
 			</td></tr>
 			<tr><td colspan="2">
 				<span class="fontawesome-lock"></span>
-				<h:inputSecret value = "Password" id="pass" a:placeholder="Password"/>
+				<h:inputSecret value = "#{accountView.password}" id="pass" a:placeholder="Password"/>
 			</td></tr>
 		</table>
 			
@@ -42,7 +42,7 @@
 			<br/><br/>
 			
 			<h:outputText value = ""/>
-			<h:commandButton action = "#" value = "LOG IN" style="font-weight: bold;" onclick=""/>
+			<h:commandButton action = "#{accountView.login()}" value = "LOG IN" style="font-weight: bold;" onclick=""/>
 			<br/><br/>
 			<h:commandButton action = "#" value = "SIGN UP" style="font-weight: bold;"/>
 			
