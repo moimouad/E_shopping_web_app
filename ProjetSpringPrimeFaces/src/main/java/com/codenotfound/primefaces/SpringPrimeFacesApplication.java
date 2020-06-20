@@ -10,9 +10,7 @@ public class SpringPrimeFacesApplication {
     
     Context.setContext(SpringApplication.run(SpringPrimeFacesApplication.class, args)) ;
     
-    /*
-    AccountRepository carRepo = context.getBean(AccountRepository.class);
-    
+    /*AccountRepository carRepo = context.getBean(AccountRepository.class);
     carRepo.save(new Account("mouad","1234"));*/
     
   }

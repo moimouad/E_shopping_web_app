@@ -14,9 +14,10 @@
     <param-value>Development</param-value>
   </context-param>
   
+  
   <!-- Welcome page -->
   <welcome-file-list>
-    <welcome-file>faces/cars.xhtml</welcome-file>
+    <welcome-file>faces/index.xhtml</welcome-file>
   </welcome-file-list>
   
   <!-- JSF mapping -->
