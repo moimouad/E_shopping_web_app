@@ -34,7 +34,9 @@ public class AccountView implements Serializable {
 	  private String repassword;
 	  public String errorMessage;
 	  private boolean loggedin;
-	  private boolean remember = false;
+	  
+
+	private boolean remember = false;
 	  
 
 	  public boolean isRemember() {
@@ -125,6 +127,7 @@ public class AccountView implements Serializable {
 	    			}            	
 	            	
 	    			FacesContext context = FacesContext.getCurrentInstance();
+	    			context.getExternalContext().getSessionMap().put("username",username);
 	    			context.getExternalContext().getSessionMap().put("username",username);
 	    			System.out.println(context.getExternalContext().getSessionMap().get("username"));
 	            	redirect("items.xhtml");
@@ -250,5 +253,15 @@ public class AccountView implements Serializable {
 			redirect("items.xhtml");
 		}
 		
+		
+		public boolean admin() {
+			init();
+	        for (int i = 0; i < Accounts.size(); i++) {
+	            if (Accounts.get(i).getUsername().equals(username)) {
+	            	return Accounts.get(i).isAdmin();
+	            }
+	        }
+	        return false;
+		}
 		
 	}

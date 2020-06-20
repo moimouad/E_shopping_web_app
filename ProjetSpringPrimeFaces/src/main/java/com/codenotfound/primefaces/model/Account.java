@@ -13,8 +13,15 @@ public class Account {
 	
 	private String username;
 	private String password;
+	private boolean admin = false;
 	private int [] cart;
 	
+	public boolean isAdmin() {
+		return admin;
+	}
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
 	public String getUsername() {
 		return username;
 	}
