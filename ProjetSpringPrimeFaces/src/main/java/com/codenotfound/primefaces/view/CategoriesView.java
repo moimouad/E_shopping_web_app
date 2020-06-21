@@ -61,31 +61,7 @@ public class CategoriesView implements Serializable {
 			}
 		}
 	  
-	  public void onRowSelect(SelectEvent event) {
-	        this.selected = (Category) event.getObject();
-	        
-	        FacesContext context = FacesContext.getCurrentInstance();
-
-	        if (this.selected == null) {
-	            String msg = "No Category is selected!!";
-	            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, null));
-	        } else {
-	            System.out.println("Category is selected in CategoriesView");
-	            String msg = "Categoty selected: " + this.selected.getName();
-	            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null));
-	        }
-
-	    }
 	  
-	    public void onRowUnselect(UnselectEvent event) {
-	        this.selected = null;
-	        String msg = "Gnome unselected: " + this.selected;
-	        FacesContext context = FacesContext.getCurrentInstance();
-	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null));
-	        if (this.selected == null) {
-	            System.out.println(this.selected + ": is unselected");
-	        }
-	    }
 	    
 	    public void deleteExistingProduct() {
 	        System.out.println("Deleting Existing product... ");

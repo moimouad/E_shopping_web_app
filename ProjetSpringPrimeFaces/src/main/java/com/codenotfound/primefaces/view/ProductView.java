@@ -37,7 +37,16 @@ public class ProductView implements Serializable {
   private String imageUrl;
   private String category;
   
-  private Product selected;
+  public Product getSelected() {
+	return selected;
+}
+
+
+public void setSelected(Product selected) {
+	this.selected = selected;
+}
+
+private Product selected;
   
   @PostConstruct
   public void init() {
@@ -157,30 +166,6 @@ public void setCategory(String category) {
       }
   }
   
-  public void onRowSelect(SelectEvent event) {
-      this.selected = (Product) event.getObject();
-      
-      FacesContext context = FacesContext.getCurrentInstance();
-
-      if (this.selected == null) {
-          String msg = "No product is selected!!";
-          context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, null));
-      } else {
-          String msg = "Product selected: " + this.selected.getName();
-          context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null));
-      }
-
-  }
-
-  public void onRowUnselect(UnselectEvent event) {
-      this.selected = null;
-      String msg = "Gnome unselected: " + this.selected;
-      FacesContext context = FacesContext.getCurrentInstance();
-      context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null));
-      if (this.selected == null) {
-          System.out.println(this.selected + ": is unselected");
-      }
-  }
   
   
 }

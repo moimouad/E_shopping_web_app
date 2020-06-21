@@ -45,13 +45,9 @@
 	
 <h:form>
 
-  <p:dataTable  var="product" value="#{productView.products}" selectionMode="single"  
-  rowKey="#{product.id}" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" 
+  <p:dataTable  var="product" value="#{productView.products}" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" 
   paginator="true"
-  rows="10"  >
-  
-  	<p:ajax event="rowSelect" listener="#{productView.onRowSelect}" update=":messages"/>
-    <p:ajax event="rowUnselect" listener="#{productView.onRowUnselect}"/>
+  rows="3"  >
   
     <p:column headerText="Id" style="text-align: center">
       <h:outputText value="#{product.id}" />
@@ -82,11 +78,15 @@
     </p:column>
     
     <p:column headerText="Edit" style="text-align: center">
-    	<p:commandButton id="edit"  value="Edit" onclick="PF('updateitemDialog').show()" icon="ui-icon-pencil"/>
+    	<p:commandButton id="edit"  value="Edit" onclick="PF('updateitemDialog').show()" icon="ui-icon-pencil">
+    		<f:setPropertyActionListener value="#{product}" target="#{productView.selected}" />
+    	</p:commandButton>
     </p:column>
 
     <p:column headerText="Delete" style="text-align: center">
-    	<p:commandButton id="delete"  value="Delete" onclick="PF('deleteitemDialog').show()" icon="ui-icon-trash"/>
+    	<p:commandButton id="delete"  value="Delete" onclick="PF('deleteitemDialog').show()" icon="ui-icon-trash">
+	        <f:setPropertyActionListener value="#{product}" target="#{productView.selected}" />
+    	</p:commandButton>
     </p:column>
 
   </p:dataTable>
@@ -134,7 +134,7 @@
     </h:form>
     
     <h:form>
-      <p:dialog id="deleteItem" header="Delete Existing Item Amount" widgetVar="deleteitemDialog" height="100px" resizable="false">
+      <p:dialog id="deleteItem" header="Delete Existing Item Amount" widgetVar="deleteitemDialog" height="50px" resizable="false">
 	  	<p:panelGrid columns="2" columnClasses="label,value">
 	    	<p:commandButton id="confirmDelete" value="OK" action="#{productView.deleteProduct()}" oncomplete="PF('deleteitemDialog').hide()"  icon="ui-icon-check"/>
 	        <p:commandButton id="cancelDelete" value="Cancel" onclick="PF('deleteitemDialog').hide()" icon="ui-icon-cancel"/>

@@ -43,13 +43,10 @@
 
 	<p:growl id="messages" showDetail="false"/>
 
-  <p:dataTable id="availableGnomes" var="category" value="#{categoriesView.categories}" selectionMode="single"  
-  rowKey="#{category.id}" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" 
+  <p:dataTable id="availableGnomes" var="category" value="#{categoriesView.categories}" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" 
   paginator="true"
   rows="10"  >
   
-  	<p:ajax event="rowSelect" listener="#{categoriesView.onRowSelect}" update=":messages"/>
-    <p:ajax event="rowUnselect" listener="#{categoriesView.onRowUnselect}"/>
   
     <p:column headerText="Id" style="text-align: center">
       <h:outputText value="#{category.id}" />
@@ -60,11 +57,15 @@
     </p:column>
     
     <p:column headerText="Edit" style="text-align: center">
-    	<p:commandButton id="edit"  value="Edit" onclick="PF('updateitemDialog').show()" icon="ui-icon-pencil"/>
+    	<p:commandButton id="edit"  value="Edit" onclick="PF('updateitemDialog').show()" icon="ui-icon-pencil">
+    		<f:setPropertyActionListener value="#{category}" target="#{categoriesView.selected}" />
+    	</p:commandButton>
     </p:column>
 
     <p:column headerText="Delete" style="text-align: center">
-    	<p:commandButton id="delete"  value="Delete" onclick="PF('deleteitemDialog').show()" icon="ui-icon-trash"/>
+    	<p:commandButton id="delete"  value="Delete" onclick="PF('deleteitemDialog').show()" icon="ui-icon-trash">
+    		<f:setPropertyActionListener value="#{category}" target="#{categoriesView.selected}" />
+    	</p:commandButton>
     </p:column>
 
   </p:dataTable>
