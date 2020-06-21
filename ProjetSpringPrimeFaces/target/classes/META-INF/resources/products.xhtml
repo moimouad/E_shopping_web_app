@@ -26,15 +26,15 @@
 	<link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet"/>
 	<link href="https://fonts.googleapis.com/css?family=Days+One" rel="stylesheet"/>
 	
-	 <title> Home </title>
+	 <title> Products </title>
 </h:head>
 
 <h:body>
 
 <ul class="topnav">
 
-  <li><h:form><h:commandLink value="Home" action = "items.xhtml" styleClass="active"></h:commandLink></h:form></li> 
-  <li><h:form><h:commandLink value="All Products" action = "products.xhtml" ></h:commandLink></h:form></li>   
+  <li><h:form><h:commandLink value="Home" action = "items.xhtml" ></h:commandLink></h:form></li> 
+  <li><h:form><h:commandLink value="All Products" action = "products.xhtml" styleClass="active"></h:commandLink></h:form></li>   
   <c:forEach var="category" items="#{categoriesView.categories}">
   	<li><h:form><h:commandLink value="#{category.name}" action = "#"></h:commandLink></h:form></li>
   </c:forEach>
