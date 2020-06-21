@@ -264,4 +264,8 @@ public class AccountView implements Serializable {
 	        return false;
 		}
 		
+		public void isAdmin() {
+			if(!admin()) redirect("items.xhtml");
+		}
+		
 	}

@@ -20,7 +20,7 @@
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
 	<link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet"/>
 	<link href="https://fonts.googleapis.com/css?family=Days+One" rel="stylesheet"/>
-  <title> Categories Admin </title>
+  <title> Products Admin </title>
 </h:head>
 
 <h:body>
@@ -28,8 +28,8 @@
 <ul class="topnav">
 
   <li><h:form><h:commandLink value="Home" action = "items.xhtml" ></h:commandLink></h:form></li> 
-  <li><h:form><h:commandLink value="Categories" action = "admin_categ.xhtml" styleClass="active"></h:commandLink></h:form></li> 
-  <li><h:form><h:commandLink value="Products" action = "admin_prod.xhtml" ></h:commandLink></h:form></li>  
+  <li><h:form><h:commandLink value="Categories" action = "admin_categ.xhtml" ></h:commandLink></h:form></li> 
+  <li><h:form><h:commandLink value="Products" action = "admin_prod.xhtml" styleClass="active"></h:commandLink></h:form></li>  
   
   <li class="right" id="username" style="#{accountView.loggedin ? '' : 'display:none'}"><h:form><h:commandLink action="#" value = "#{accountView.username}"/></h:form></li>
   <li class="right" style="#{accountView.loggedin ? '' : 'display:none'}"><h:form><h:commandLink action="#{accountView.logout()}" value = "Logout" /></h:form></li>

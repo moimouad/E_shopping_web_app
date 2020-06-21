@@ -25,7 +25,7 @@
 
 <ul class="topnav">
 
-  <li><h:form><h:commandLink value="Home" action = "#" styleClass="active"></h:commandLink></h:form></li>  
+  <li><h:form><h:commandLink value="Home" action = "items.xhtml" styleClass="active"></h:commandLink></h:form></li>  
   <c:forEach var="category" items="#{categoriesView.categories}">
   	<li><h:form><h:commandLink value="#{category.name}" action = "#"></h:commandLink></h:form></li>
   </c:forEach>
