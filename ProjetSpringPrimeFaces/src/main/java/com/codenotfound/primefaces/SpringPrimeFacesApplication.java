@@ -3,9 +3,6 @@ package com.codenotfound.primefaces;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.codenotfound.primefaces.model.Category;
-import com.codenotfound.primefaces.repository.CategoryRepository;
-
 @SpringBootApplication
 public class SpringPrimeFacesApplication {
 
