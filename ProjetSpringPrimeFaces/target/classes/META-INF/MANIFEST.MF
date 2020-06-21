@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
-Built-By: ELKACEM
-Build-Jdk: 12.0.1
 Implementation-Title: jsf-primefaces-datatable-mysql
 Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Mad Manson
 Implementation-Vendor-Id: com.codenotfound
-Implementation-Vendor: JoinFaces
+Build-Jdk: 1.8.0_191
 Implementation-URL: https://www.codenotfound.com/jsf-primefaces/
 Created-By: Maven Integration for Eclipse
+Implementation-Vendor: JoinFaces
 
