@@ -171,6 +171,47 @@ public void setCategory(String category) {
 	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Admin: Category Update successfully.", null));
 	        redirect("admin_prod.xhtml");
       }
+      
+      
+  }
+  
+  public void updateProduct() {
+      System.out.println("update New Category... ");
+      
+      
+      if (name != null && !name.equals("")) {
+	       selected.setName(name);
+      }
+      
+      if (description != null && !description.equals("")) {
+	       selected.setDescription(description);
+     }
+      
+      if (category != null && !category.equals("")) {
+	       selected.setCategory(category);
+      }
+      
+      if (imageUrl != null && !imageUrl.equals("")) {
+	       selected.setImageUrl(imageUrl);
+     }
+      
+      if (price != 0 ) {
+	       selected.setPrice(price);
+     }
+      
+      if (quantity != 0 ) {
+	       selected.setQuantity(quantity);
+      }
+      
+      
+      
+      FacesContext context = FacesContext.getCurrentInstance();
+      ProductRepository accRepo = Context.getContext().getBean(ProductRepository.class);
+      accRepo.save(selected);
+      context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Admin: Category Update successfully.", null));
+      redirect("admin_prod.xhtml");
+      
+      
   }
   
   
@@ -194,7 +235,12 @@ public void setCategory(String category) {
   public void chose(int i) {
 	  FacesContext context = FacesContext.getCurrentInstance();
 	  context.getExternalContext().getSessionMap().put("chose",null);
-	  redirect("products.xhtml");
+	  if (i==0) {
+		  redirect("products.xhtml");
+	  }
+	  else {
+		  redirect("admin_categ.xhtml");
+	  }
   }
   
   
