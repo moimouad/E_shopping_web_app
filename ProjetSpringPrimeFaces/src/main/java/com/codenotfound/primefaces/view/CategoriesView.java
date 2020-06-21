@@ -129,6 +129,17 @@ public class CategoriesView implements Serializable {
 	            redirect("admin_categ.xhtml");
 
 	    }
+	    
+	    public void addProduct() {
+	        System.out.println("Add New Category... ");
+	        FacesContext context = FacesContext.getCurrentInstance();
+	        if (namee != null && !namee.equals("")) {
+		        CategoryRepository accRepo = Context.getContext().getBean(CategoryRepository.class);
+				accRepo.save(new Category(namee));
+		        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Admin: Category Update successfully.", null));
+		        redirect("admin_categ.xhtml");
+	        }
+	    }
 		  
 
 }

@@ -71,12 +71,33 @@
 
   </p:dataTable>
   
+  <br/>
+  <br/>
+
+    <div align="center">
+          <p:commandButton id="add"  value="Add New Category" onclick="PF('additemDialog').show()" icon="ui-icon-pencil" />
+    </div>
+  
   
   <p:dialog id="deleteItem" header="Delete Existing Item Amount" widgetVar="deleteitemDialog" height="100px" resizable="false">
   	<p:panelGrid columns="2" columnClasses="label,value">
     	<p:commandButton id="confirmDelete" value="OK" action="#{categoriesView.deleteExistingProduct()}" oncomplete="PF('deleteitemDialog').hide()"  icon="ui-icon-check"/>
         <p:commandButton id="cancelDelete" value="Cancel" onclick="PF('deleteitemDialog').hide()" icon="ui-icon-cancel"/>
     </p:panelGrid>
+  </p:dialog>
+  
+  
+   <p:dialog id="addItem" header="Add Item Amount" widgetVar="additemDialog" height="100px" resizable="false">
+       <h:form>
+     <p:panelGrid columns="2" columnClasses="label,value">
+
+        <h:outputLabel value="Name of Category:" />
+        <h:inputText value="#{categoriesView.namee}"/>
+        <p:commandButton value="OK" action="#{categoriesView.addProduct()}" oncomplete="PF('additemDialog').hide()" icon="ui-icon-check"/>
+        <p:commandButton value="Cancel" onclick="PF('additemDialog').hide()" icon="ui-icon-cancel"/> 
+
+     </p:panelGrid>
+          </h:form>
   </p:dialog>
   
   <p:dialog id="updateItemAmount" header="Update Existing Item Amount" widgetVar="updateitemDialog" height="100px" resizable="false">
