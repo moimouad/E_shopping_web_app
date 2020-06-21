@@ -42,21 +42,39 @@
 
 
 	<p:growl id="messages" showDetail="false"/>
+	
+<h:form>
 
-  <p:dataTable id="availableGnomes" var="category" value="#{categoriesView.categories}" selectionMode="single"  
-  rowKey="#{category.id}" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" 
+  <p:dataTable  var="product" value="#{productView.products}" selectionMode="single"  
+  rowKey="#{product.id}" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" 
   paginator="true"
   rows="10"  >
   
-  	<p:ajax event="rowSelect" listener="#{categoriesView.onRowSelect}" update=":messages"/>
-    <p:ajax event="rowUnselect" listener="#{categoriesView.onRowUnselect}"/>
+  	<p:ajax event="rowSelect" listener="#{productView.onRowSelect}" update=":messages"/>
+    <p:ajax event="rowUnselect" listener="#{productView.onRowUnselect}"/>
   
     <p:column headerText="Id" style="text-align: center">
-      <h:outputText value="#{category.id}" />
+      <h:outputText value="#{product.id}" />
     </p:column>
 
     <p:column headerText="Name" style="text-align: center">
-      <h:outputText value="#{category.name}" />
+      <h:outputText value="#{product.name}" />
+    </p:column>
+    
+    <p:column headerText="Description" style="text-align: center">
+      <h:outputText value="#{product.description}" />
+    </p:column>
+    
+    <p:column headerText="Price" style="text-align: center">
+      <h:outputText value="#{product.price}" />
+    </p:column>
+    
+    <p:column headerText="Quantity" style="text-align: center">
+      <h:outputText value="#{product.quantity}" />
+    </p:column>
+    
+    <p:column headerText="Category" style="text-align: center">
+      <h:outputText value="#{product.category}" />
     </p:column>
     
     <p:column headerText="Edit" style="text-align: center">
@@ -68,48 +86,50 @@
     </p:column>
 
   </p:dataTable>
+ </h:form>
   
   <br/>
   <br/>
 
     <div align="center">
-          <p:commandButton id="add"  value="Add New Category" onclick="PF('additemDialog').show()" icon="ui-icon-pencil" />
+          <p:commandButton id="add"  value="Add New product" onclick="PF('additemDialog').show()" icon="ui-icon-pencil" />
     </div>
+    
+        <h:form id="additemForm">
+        <!-- Growl component -->
+        <p:growl id="messages" showDetail="false"/>
+        <p:dialog header="Add Item" widgetVar="additemDialog" height="300px" resizable="false">
+            <h:panelGrid columns="2" cellpadding="5">
+                
+                <p:outputLabel for="itemName" value="Name: " />
+                <p:inputText id="itemName" value="#{productView.name}"/>
+                
+                <p:outputLabel for="itemPrice" value="Description: " />
+                <p:inputText id="itemPrice" value="#{productView.description}"/>
+                
+                <p:outputLabel for="itemTotal" value="Price: " />
+                <p:inputText id="itemTotal" value="#{productView.price}"/>
+                
+                <p:outputLabel for="itemAvailable" value="Quantity: " />
+                <p:inputText id="itemAvailable" value="#{productView.quantity}"/>
+                
+                <p:outputLabel for="itemAvailable" value="Image Link: " />
+                <p:inputText value="#{productView.imageUrl}"/>
+                
+                <p:outputLabel for="itemAvailable" value="Categorie : " />
+                <p:selectOneMenu id="console" value="#{productView.category}" style="width:125px">
+                	<c:forEach var="category" items="#{categoriesView.categories}">
+                		<f:selectItem itemLabel="#{category.name}" itemValue="#{category.name}" />
+					</c:forEach>
+		        </p:selectOneMenu>
+                
+                <p:commandButton  value="OK" action="#{productView.addProduct()}"  oncomplete="PF('additemDialog').hide()" icon="ui-icon-check"/>
+                <p:commandButton   value="Cancel" onclick="PF('additemDialog').hide()" icon="ui-icon-cancel"/>
+            </h:panelGrid>
+        </p:dialog>
+    </h:form>
   
   
-  <p:dialog id="deleteItem" header="Delete Existing Item Amount" widgetVar="deleteitemDialog" height="100px" resizable="false">
-  	<p:panelGrid columns="2" columnClasses="label,value">
-    	<p:commandButton id="confirmDelete" value="OK" action="#{categoriesView.deleteExistingProduct()}" oncomplete="PF('deleteitemDialog').hide()"  icon="ui-icon-check"/>
-        <p:commandButton id="cancelDelete" value="Cancel" onclick="PF('deleteitemDialog').hide()" icon="ui-icon-cancel"/>
-    </p:panelGrid>
-  </p:dialog>
-  
-  
-   <p:dialog id="addItem" header="Add Item Amount" widgetVar="additemDialog" height="100px" resizable="false">
-       <h:form>
-     <p:panelGrid columns="2" columnClasses="label,value">
-
-        <h:outputLabel value="Name of Category:" />
-        <h:inputText value="#{categoriesView.namee}"/>
-        <p:commandButton value="OK" action="#{categoriesView.addProduct()}" oncomplete="PF('additemDialog').hide()" icon="ui-icon-check"/>
-        <p:commandButton value="Cancel" onclick="PF('additemDialog').hide()" icon="ui-icon-cancel"/> 
-
-     </p:panelGrid>
-          </h:form>
-  </p:dialog>
-  
-  <p:dialog id="updateItemAmount" header="Update Existing Item Amount" widgetVar="updateitemDialog" height="100px" resizable="false">
-       <h:form>
-     <p:panelGrid columns="2" columnClasses="label,value">
-
-        <h:outputLabel value="New name:" />
-        <h:inputText value="#{categoriesView.namee}"/>
-        <p:commandButton id="confirmEdit" value="OK" action="#{categoriesView.updateExistingProduct()}" oncomplete="PF('updateitemDialog').hide()" icon="ui-icon-check"/>
-        <p:commandButton id="cancelEdit" value="Cancel" onclick="PF('updateitemDialog').hide()" icon="ui-icon-cancel"/> 
-
-     </p:panelGrid>
-          </h:form>
-   </p:dialog>
 <!-- Fin Body !!! -->
 
 <div class="heading">
