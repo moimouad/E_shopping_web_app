@@ -9,8 +9,6 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
-import org.primefaces.event.SelectEvent;
-import org.primefaces.event.UnselectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.codenotfound.primefaces.Context;
@@ -32,15 +30,27 @@ public class ProductView implements Serializable {
   private Long id;
 
 
-private String name = "teeeeest";
+  private String name;
   private String description;
   private int price;
   private int quantity;
   private String imageUrl;
   private String category;
   
+  private String chose;
   
-  public Long getId() {
+  
+  public String getChose() {
+	return chose;
+}
+
+
+public void setChose(String chose) {
+	this.chose = chose;
+}
+
+
+public Long getId() {
 	return id;
 }
 
@@ -62,7 +72,22 @@ private Product selected;
   
   @PostConstruct
   public void init() {
+	  
+	FacesContext context = FacesContext.getCurrentInstance();
+	this.setChose((String) context.getExternalContext().getSessionMap().get("chose"));
+	
+	
     Products = ProductRepository.findAll();
+    if (chose != null) {
+    	int len = Products.size();
+        for (int i = 0; i < len; i++) {
+        	if(!Products.get(i).getCategory().equals(chose)) {
+        		Products.remove(i);
+        		i--;
+        		len--;
+        	}
+        }
+    }
   }
   
   
@@ -158,6 +183,18 @@ public void setCategory(String category) {
 	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Admin: Category Delete successfully.", null));
 	        redirect("admin_prod.xhtml");
       }
+  }
+  
+  public void chose() {
+	  FacesContext context = FacesContext.getCurrentInstance();
+	  context.getExternalContext().getSessionMap().put("chose",chose);
+	  redirect("products.xhtml");
+  }
+  
+  public void chose(int i) {
+	  FacesContext context = FacesContext.getCurrentInstance();
+	  context.getExternalContext().getSessionMap().put("chose",null);
+	  redirect("products.xhtml");
   }
   
   
