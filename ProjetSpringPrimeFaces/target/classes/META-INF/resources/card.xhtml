@@ -48,14 +48,6 @@ document.getElementById("date").innerHTML = Date();
       <h:outputText value="#{product.description}" />
     </p:column>
     
-    <p:column headerText="Price" style="text-align: center">
-      <h:outputText value="#{product.price}" />
-    </p:column>
-    
-    <p:column headerText="Quantity" style="text-align: center">
-      <h:outputText value="#{product.quantity}" />
-    </p:column>
-    
     <p:column headerText="Product image" style="text-align: center">
     	<p:graphicImage url="#{product.imageUrl}" style = "width:150px;height:150px "/>
     </p:column>
@@ -64,11 +56,27 @@ document.getElementById("date").innerHTML = Date();
       <h:outputText value="#{product.category}" />
     </p:column>
     
+    <p:column headerText="Price" style="text-align: center">
+      <h:outputText value="#{product.price}  DH" />
+    </p:column>
+    
+    <p:column headerText="Quantity" style="text-align: center">
+      <h:outputText value="#{product.quantity}" />
+    </p:column>
+    
+    <p:column headerText="Total produit" style="text-align: center">
+      <h:outputText value="#{product.quantity * product.price} DH" />
+    </p:column>
+    
     <p:column headerText="Delete" style="text-align: center">
     	<p:commandButton id="delete"  value="Delete" onclick="PF('deleteitemDialog').show()" icon="ui-icon-trash">
 	        <f:setPropertyActionListener value="#{product.id}" target="#{cardView.selected}" />
     	</p:commandButton>
     </p:column>
+    
+    <f:facet name="footer">
+    	Total : #{cardView.total} DH
+  	</f:facet>
 
   </p:dataTable>
  </h:form>
