@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:c="http://java.sun.com/jstl/core"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  
+  xmlns:p="http://primefaces.org/ui">
+  
+
+<h:head>
+         
+<script>
+document.getElementById("date").innerHTML = Date();
+</script>
+
+   <f:metadata>
+  	<f:event listener="#{accountView.verifyLoginOnWelcomedummy()}" type="preRenderView"></f:event>
+  	<f:event listener="#{accountView.checkloginstatus()}" type="preRenderView"></f:event>
+
+  </f:metadata>
+  
+	 <title> Card </title>
+</h:head>
+
+<h:body>
+
+<ui:include src="navbar.xhtml" />
+
+<!-- Debut Body !!! -->
+
+
+<p:growl id="messages" showDetail="false"/>
+	
+<h:form>
+
+  <p:dataTable  var="product" value="#{cardView.products}" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" 
+  paginator="true"
+  rows="3"  >
+  
+
+    <p:column headerText="Name" style="text-align: center">
+      <h:outputText value="#{product.name}" />
+    </p:column>
+    
+    <p:column headerText="Description" style="text-align: center">
+      <h:outputText value="#{product.description}" />
+    </p:column>
+    
+    <p:column headerText="Price" style="text-align: center">
+      <h:outputText value="#{product.price}" />
+    </p:column>
+    
+    <p:column headerText="Quantity" style="text-align: center">
+      <h:outputText value="#{product.quantity}" />
+    </p:column>
+    
+    <p:column headerText="Product image" style="text-align: center">
+    	<p:graphicImage url="#{product.imageUrl}" style = "width:150px;height:150px "/>
+    </p:column>
+    
+    <p:column headerText="Category" style="text-align: center">
+      <h:outputText value="#{product.category}" />
+    </p:column>
+    
+    <p:column headerText="Delete" style="text-align: center">
+    	<p:commandButton id="delete"  value="Delete" onclick="PF('deleteitemDialog').show()" icon="ui-icon-trash">
+	        <f:setPropertyActionListener value="#{product.id}" target="#{cardView.selected}" />
+    	</p:commandButton>
+    </p:column>
+
+  </p:dataTable>
+ </h:form>
+      
+    
+    <h:form>
+      <p:dialog id="deleteItem" header="Delete Existing Item Amount" widgetVar="deleteitemDialog" height="50px" resizable="false">
+	  	<p:panelGrid columns="2" columnClasses="label,value">
+	    	<p:commandButton id="confirmDelete" value="OK" action="#{cardView.deleteProduct()}" oncomplete="PF('deleteitemDialog').hide()"  icon="ui-icon-check"/>
+	        <p:commandButton id="cancelDelete" value="Cancel" onclick="PF('deleteitemDialog').hide()" icon="ui-icon-cancel"/>
+	    </p:panelGrid>
+	  </p:dialog>
+    </h:form>
+    
+
+    
+    
+<!-- Fin Body !!! -->
+
+<!-- Debut Footer !!! -->
+<ui:include src="footer.xhtml" />
+
+<!-- Fin Footer !!! -->
+</h:body>
+</html>

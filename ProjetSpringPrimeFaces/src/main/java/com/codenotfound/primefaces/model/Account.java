@@ -14,7 +14,6 @@ public class Account {
 	private String username;
 	private String password;
 	private boolean admin = false;
-	private int [] cart;
 	
 	public boolean isAdmin() {
 		return admin;

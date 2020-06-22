@@ -41,20 +41,10 @@
                <p:graphicImage url="#{product.imageUrl}" style = "width:150px;height:150px" />
  
                <h:outputText value="#{product.name}" />
-                
-                <!--  
-                <p:commandButton  value="View Detail" onclick="PF('deleteitemDialog').show()" >
-			        <f:setPropertyActionListener value="#{product}" target="#{productView.selected}" />
-		    	</p:commandButton>
-		    	-->
 		    	
 			<p:commandButton  update=":test:carDetail" value="View Detail" oncomplete="PF('carDialog').show()">
 				<f:setPropertyActionListener value="#{product}" target="#{productView.selected}"/>
-		       <!--   <f:setPropertyActionListener value="#{product.id}" target="#{productView.id}" />
-		        <f:setPropertyActionListener value="#{product.name}" target="#{productView.name}" />
-		        <f:setPropertyActionListener value="#{product.description}" target="#{productView.description}" />
-		        <f:setPropertyActionListener value="#{product.price}" target="#{productView.price}" />
-		        <f:setPropertyActionListener value="#{product.imageUrl}" target="#{productView.imageUrl}" />-->
+
 	    	</p:commandButton >
 
             </h:panelGrid>
@@ -89,6 +79,16 @@
                 
                 <h:outputText value="Category : " />
                 <h:outputText value="#{productView.selected.category}" />
+                
+                <h:outputLabel value="Min/Max : "  style="#{accountView.loggedin ? '' : 'display:none'}" />
+        		<p:spinner id="minMax" value="#{cardView.card.quantity}" min="1" max="#{productView.selected.quantity}" style="#{accountView.loggedin ? '' : 'display:none'}"/>
+        		
+        		<h:outputLabel value="Order : " style="#{accountView.loggedin ? '' : 'display:none'}"/>
+        		<p:commandButton   style="#{accountView.loggedin ? '' : 'display:none'}" value="Add to Card" action="#{cardView.addToCard()}" oncomplete="PF('carDialog').hide()">
+					<f:setPropertyActionListener value="#{productView.selected.id}" target="#{cardView.card.idProd}"/>
+					<f:setPropertyActionListener value="#{accountView.username}" target="#{cardView.card.user}"/>
+	    		</p:commandButton >
+	    		
             </p:panelGrid>
         </p:outputPanel>
 	</p:dialog>

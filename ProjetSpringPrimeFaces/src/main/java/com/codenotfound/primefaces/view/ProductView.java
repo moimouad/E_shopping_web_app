@@ -37,7 +37,7 @@ public class ProductView implements Serializable {
   private String imageUrl;
   private String category;
   
-  private String chose;
+  private String chose = "home";
   
   
   public String getChose() {
@@ -238,8 +238,12 @@ public void setCategory(String category) {
 	  if (i==0) {
 		  redirect("products.xhtml");
 	  }
-	  else {
+	  else if (i==1) {
 		  redirect("admin_categ.xhtml");
+	  }
+	  else if (i==2) {
+		  context.getExternalContext().getSessionMap().put("chose","home");
+		  redirect("items.xhtml");
 	  }
   }
   
