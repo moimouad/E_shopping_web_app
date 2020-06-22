@@ -41,6 +41,89 @@ public class CardView implements Serializable {
 	private int total;
 	private int totalOrders;
 	
+	@PostConstruct
+	public void init() {
+		
+		total = 0;
+		totalOrders = 0;
+		card = new Card();
+		actUser = null;
+		selected = null;
+		products.clear();
+		productsOrder.clear();
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		actUser = (String) context.getExternalContext().getSessionMap().get("username");
+		cards = cardRepository.findAll();
+		orders = cardRepository.findAll();
+		ordersAdmin = cardRepository.findAll();
+		
+		int len = ordersAdmin.size();
+		
+        for (int i = 0; i < len ; i++) {
+        	if(ordersAdmin.get(i).isValid() || !ordersAdmin.get(i).isOrderbool()) {
+        		ordersAdmin.remove(i);
+        		i--;
+        		len--;
+        	}
+        }
+        
+      //----------------------------------------------------------------------
+        
+        len = cards.size();
+        for (int i = 0; i < len; i++) {
+        	if(!cards.get(i).getUser().equals(actUser) || cards.get(i).isOrderbool()) {
+        		cards.remove(i);
+        		i--;
+        		len--;
+        	}
+        }
+ 
+        for (int i = 0; i < cards.size(); i++) {
+        	
+        	Product p = productRepository.findOne(cards.get(i).getIdProd());
+        	
+        	p.setQuantity(cards.get(i).getQuantity());
+        	
+        	p.setId(cards.get(i).getId());
+        	
+        	total += p.getPrice() * p.getQuantity();
+        
+        	products.add(p) ;
+        	
+        }
+        
+        //----------------------------------------------------------------------
+        
+        len = orders.size();
+        for (int i = 0; i < len; i++) {
+        	if(!orders.get(i).getUser().equals(actUser) || !orders.get(i).isOrderbool()) {
+        		orders.remove(i);
+        		i--;
+        		len--;
+        	}
+        }
+ 
+        for (int i = 0; i < orders.size(); i++) {
+        	
+        	Product p = productRepository.findOne(orders.get(i).getIdProd());
+        	
+        	p.setQuantity(orders.get(i).getQuantity());
+        	
+        	if(orders.get(i).isValid()) {
+        		p.setId(Long.valueOf(1));
+        	}
+        	else {
+        		p.setId(Long.valueOf(0));
+        	}
+        	
+        	totalOrders += p.getPrice() * p.getQuantity();
+        
+        	productsOrder.add(p) ;
+        	
+        }     
+	}
+	
 	
 	
 	public List<Card> getOrders() {
@@ -108,86 +191,7 @@ public class CardView implements Serializable {
 	}
 
 
-	@PostConstruct
-	public void init() {
-		
-		total = 0;
-		totalOrders = 0;
-		
-		FacesContext context = FacesContext.getCurrentInstance();
-		actUser = (String) context.getExternalContext().getSessionMap().get("username");
-		cards = cardRepository.findAll();
-		orders = cardRepository.findAll();
-		ordersAdmin = cardRepository.findAll();
-		
-		products.clear();
-		productsOrder.clear();
-		
-		int len = ordersAdmin.size();
-		
-        for (int i = 0; i < len ; i++) {
-        	if(ordersAdmin.get(i).isValid() || !ordersAdmin.get(i).isOrderbool()) {
-        		ordersAdmin.remove(i);
-        		i--;
-        		len--;
-        	}
-        }
-		
-        
-        len = cards.size();
-        for (int i = 0; i < len; i++) {
-        	if(!cards.get(i).getUser().equals(actUser) || cards.get(i).isOrderbool()) {
-        		cards.remove(i);
-        		i--;
-        		len--;
-        	}
-        }
- 
-        for (int i = 0; i < cards.size(); i++) {
-        	
-        	Product p = productRepository.findOne(cards.get(i).getIdProd());
-        	
-        	p.setQuantity(cards.get(i).getQuantity());
-        	
-        	p.setId(cards.get(i).getId());
-        	
-        	total += p.getPrice() * p.getQuantity();
-        
-        	products.add(p) ;
-        	
-        }
-        
-        //----------------------------------------------------------------------
-        
-        len = orders.size();
-        for (int i = 0; i < len; i++) {
-        	if(!orders.get(i).getUser().equals(actUser) || !orders.get(i).isOrderbool()) {
-        		orders.remove(i);
-        		i--;
-        		len--;
-        	}
-        }
- 
-        for (int i = 0; i < orders.size(); i++) {
-        	
-        	Product p = productRepository.findOne(orders.get(i).getIdProd());
-        	
-        	p.setQuantity(orders.get(i).getQuantity());
-        	
-        	if(orders.get(i).isValid()) {
-        		p.setId(Long.valueOf(1));
-        	}
-        	else {
-        		p.setId(Long.valueOf(0));
-        	}
-        	
-        	totalOrders += p.getPrice() * p.getQuantity();
-        
-        	productsOrder.add(p) ;
-        	
-        }
-        
-	}
+
 
 	public List<Product> getProducts() {
 		return products;
@@ -219,6 +223,7 @@ public class CardView implements Serializable {
 	public void addToCard() {
 		CardRepository accRepo = Context.getContext().getBean(CardRepository.class);
 		accRepo.save(card);
+		init();
 		redirect("products.xhtml");
 	 }
 	

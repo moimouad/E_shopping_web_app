@@ -13,7 +13,7 @@
    <f:metadata>
   	<f:event listener="#{accountView.verifyLoginOnWelcomedummy()}" type="preRenderView"></f:event>
   	<f:event listener="#{accountView.checkloginstatus()}" type="preRenderView"></f:event>
-	<f:event listener="#{productView.init()}" update=":test:carDetail" type="preRenderView"></f:event>
+	<f:event listener="#{productView.init()}" type="preRenderView"></f:event>
 
   </f:metadata>
 
@@ -45,7 +45,6 @@
 		    	
 			<p:commandButton  update=":test:carDetail" value="View Detail" oncomplete="PF('carDialog').show()">
 				<f:setPropertyActionListener value="#{product}" target="#{productView.selected}"/>
-
 	    	</p:commandButton >
 
             </h:panelGrid>
@@ -58,6 +57,7 @@
 	<p:dialog header="Produit" widgetVar="carDialog" resizable="false">
 		<p:outputPanel id="carDetail" style="text-align:center;">
         	<p:panelGrid  columns="2" rendered="#{not empty productView.selected}" columnClasses="label,value">
+
             
                 <f:facet name="header">
                     <p:graphicImage url="#{productView.selected.imageUrl}"   style = "width:300px;height:300px"/> 

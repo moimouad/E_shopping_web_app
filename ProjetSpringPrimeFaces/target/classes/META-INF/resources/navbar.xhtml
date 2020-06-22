@@ -11,6 +11,8 @@
 	<link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet"/>
 	<link href="https://fonts.googleapis.com/css?family=Days+One" rel="stylesheet"/>
 	
+	<f:event listener="#{productView.init()}" type="preRenderView"></f:event>
+	
 	<ul class="topnav">
 
   <li><h:form><h:commandLink value="Home" action = "#{productView.chose(2)}" styleClass= "#{productView.chose.equals('home') ? 'active' : ''}"></h:commandLink></h:form></li> 
