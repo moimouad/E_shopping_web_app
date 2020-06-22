@@ -13,13 +13,34 @@ public class Card {
 	private String user;
 	private Long idProd;
 	private int quantity;
+	private boolean orderbool = false;
+	private boolean valid = false;
+	
 	public Long getId() {
 		return id;
 	}
+
+
 	
-	public void setId(Long id) {
-		this.id = id;
+	public boolean isOrderbool() {
+		return orderbool;
 	}
+
+
+
+	public void setOrderbool(boolean orderbool) {
+		this.orderbool = orderbool;
+	}
+
+
+
+	public boolean isValid() {
+		return valid;
+	}
+	public void setValid(boolean valid) {
+		this.valid = valid;
+	}
+
 	public String getUser() {
 		return user;
 	}

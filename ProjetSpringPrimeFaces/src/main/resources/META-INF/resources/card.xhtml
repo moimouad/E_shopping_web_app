@@ -76,6 +76,8 @@ document.getElementById("date").innerHTML = Date();
     
     <f:facet name="footer">
     	Total : #{cardView.total} DH
+    	    	<br/>
+    	<p:commandButton value="Validate Cart" onclick="PF('validatecart').show()" icon="ui-icon-pencil" />
   	</f:facet>
 
   </p:dataTable>
@@ -87,6 +89,15 @@ document.getElementById("date").innerHTML = Date();
 	  	<p:panelGrid columns="2" columnClasses="label,value">
 	    	<p:commandButton id="confirmDelete" value="OK" action="#{cardView.deleteProduct()}" oncomplete="PF('deleteitemDialog').hide()"  icon="ui-icon-check"/>
 	        <p:commandButton id="cancelDelete" value="Cancel" onclick="PF('deleteitemDialog').hide()" icon="ui-icon-cancel"/>
+	    </p:panelGrid>
+	  </p:dialog>
+    </h:form>
+    
+    <h:form>
+      <p:dialog id="validCart" header="Validate Cart" widgetVar="validatecart" height="50px" resizable="false">
+	  	<p:panelGrid columns="2" columnClasses="label,value">
+	    	<p:commandButton  value="OK" action="#{cardView.orderProduct()}" oncomplete="PF('validatecart').hide()"  icon="ui-icon-check"/>
+	        <p:commandButton  value="Cancel" onclick="PF('deleteitemDialog').hide()" icon="ui-icon-cancel"/>
 	    </p:panelGrid>
 	  </p:dialog>
     </h:form>

@@ -21,7 +21,7 @@ document.getElementById("date").innerHTML = Date();
 
   </f:metadata>
   
-	 <title> Card </title>
+	 <title> Orders </title>
 </h:head>
 
 <h:body>
@@ -35,7 +35,7 @@ document.getElementById("date").innerHTML = Date();
 	
 <h:form>
 
-  <p:dataTable  var="product" value="#{cardView.products}" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" 
+  <p:dataTable  var="product" value="#{cardView.productsOrder}" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" 
   paginator="true"
   rows="3"  >
   
@@ -68,39 +68,17 @@ document.getElementById("date").innerHTML = Date();
       <h:outputText value="#{product.quantity * product.price} DH" />
     </p:column>
     
-    <p:column headerText="Delete" style="text-align: center">
-    	<p:commandButton id="delete"  value="Delete" onclick="PF('deleteitemDialog').show()" icon="ui-icon-trash">
-	        <f:setPropertyActionListener value="#{product.id}" target="#{cardView.selected}" />
-    	</p:commandButton>
+    <p:column headerText="State" style="text-align: center">
+      <h:outputText value="#{product.id == 1 ? 'Delivred' : 'Waiting for validation'}" />
     </p:column>
     
+    
     <f:facet name="footer">
-    	Total : #{cardView.total} DH
-    	    	<br/>
-    	<p:commandButton value="Validate Cart" onclick="PF('validatecart').show()" icon="ui-icon-pencil" />
+    	Total : #{cardView.totalOrders} DH
   	</f:facet>
 
   </p:dataTable>
  </h:form>
-      
-    
-    <h:form>
-      <p:dialog id="deleteItem" header="Delete Existing Item Amount" widgetVar="deleteitemDialog" height="50px" resizable="false">
-	  	<p:panelGrid columns="2" columnClasses="label,value">
-	    	<p:commandButton id="confirmDelete" value="OK" action="#{cardView.deleteProduct()}" oncomplete="PF('deleteitemDialog').hide()"  icon="ui-icon-check"/>
-	        <p:commandButton id="cancelDelete" value="Cancel" onclick="PF('deleteitemDialog').hide()" icon="ui-icon-cancel"/>
-	    </p:panelGrid>
-	  </p:dialog>
-    </h:form>
-    
-    <h:form>
-      <p:dialog id="validCart" header="Validate Cart" widgetVar="validatecart" height="50px" resizable="false">
-	  	<p:panelGrid columns="2" columnClasses="label,value">
-	    	<p:commandButton  value="OK" action="#{cardView.orderProduct()}" oncomplete="PF('validatecart').hide()"  icon="ui-icon-check"/>
-	        <p:commandButton  value="Cancel" onclick="PF('deleteitemDialog').hide()" icon="ui-icon-cancel"/>
-	    </p:panelGrid>
-	  </p:dialog>
-    </h:form>
     
 
     

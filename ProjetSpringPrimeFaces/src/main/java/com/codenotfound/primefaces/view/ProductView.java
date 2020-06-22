@@ -249,6 +249,10 @@ public void setCategory(String category) {
 		  context.getExternalContext().getSessionMap().put("chose","card");
 		  redirect("card.xhtml");
 	  }
+	  else if (i==4) {
+		  context.getExternalContext().getSessionMap().put("chose","orders");
+		  redirect("orders.xhtml");
+	  }
   }
   
   

@@ -25,7 +25,7 @@
   	</li>
   </c:forEach>
   
-  <li class="right" style="#{accountView.loggedin ? '' : 'display:none'}"><h:form><h:commandLink action="orders?faces-redirect=true" value = "orders" onclick="#"/></h:form></li>
+  <li class="right" style="#{accountView.loggedin ? '' : 'display:none'}"><h:form><h:commandLink action="#{productView.chose(4)}" value = "orders" styleClass= "#{productView.chose.equals('orders') ? 'active' : ''}"/></h:form></li>
   <li class="right" id="username" style="#{accountView.loggedin ? '' : 'display:none'}"><h:form><h:commandLink action="#" value = "#{accountView.username}"/></h:form></li>
   <li class="right" style="#{accountView.loggedin ? '' : 'display:none'}"><h:form><h:commandLink action="#{accountView.logout()}" value = "Logout" /></h:form></li>
   <li class="right" style="#{accountView.loggedin ? 'display:none' : ''}"><h:form><h:commandLink action="index.xhtml" value = "Login/Signup"/></h:form></li>

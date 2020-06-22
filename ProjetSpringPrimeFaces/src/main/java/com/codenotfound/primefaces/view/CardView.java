@@ -30,12 +30,41 @@ public class CardView implements Serializable {
 	private ProductRepository productRepository;
 	
 	private List<Card> cards;
+	private List<Card> orders;
 	private ArrayList<Product> products =  new ArrayList<Product>() ;
+	private ArrayList<Product> productsOrder =  new ArrayList<Product>() ;
 	private Card card = new Card();
 	private String actUser;
 	private Long selected;
 	private int total;
+	private int totalOrders;
 	
+	
+	
+	public List<Card> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Card> orders) {
+		this.orders = orders;
+	}
+
+	public ArrayList<Product> getProductsOrder() {
+		return productsOrder;
+	}
+
+	public void setProductsOrder(ArrayList<Product> productsOrder) {
+		this.productsOrder = productsOrder;
+	}
+
+	public int getTotalOrders() {
+		return totalOrders;
+	}
+
+	public void setTotalOrders(int totalOrders) {
+		this.totalOrders = totalOrders;
+	}
+
 	public int getTotal() {
 		return total;
 	}
@@ -72,13 +101,19 @@ public class CardView implements Serializable {
 	public void init() {
 		
 		total = 0;
+		totalOrders = 0;
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 		actUser = (String) context.getExternalContext().getSessionMap().get("username");
 		cards = cardRepository.findAll();
+		orders = cardRepository.findAll();
+		
+		products.clear();
+		productsOrder.clear();
+		
 		int len = cards.size();
         for (int i = 0; i < len; i++) {
-        	if(!cards.get(i).getUser().equals(actUser)) {
+        	if(!cards.get(i).getUser().equals(actUser) || cards.get(i).isOrderbool()) {
         		cards.remove(i);
         		i--;
         		len--;
@@ -96,6 +131,36 @@ public class CardView implements Serializable {
         	total += p.getPrice() * p.getQuantity();
         
         	products.add(p) ;
+        	
+        }
+        
+        //----------------------------------------------------------------------
+        
+        len = orders.size();
+        for (int i = 0; i < len; i++) {
+        	if(!orders.get(i).getUser().equals(actUser) || !orders.get(i).isOrderbool()) {
+        		orders.remove(i);
+        		i--;
+        		len--;
+        	}
+        }
+ 
+        for (int i = 0; i < orders.size(); i++) {
+        	
+        	Product p = productRepository.findOne(orders.get(i).getIdProd());
+        	
+        	p.setQuantity(orders.get(i).getQuantity());
+        	
+        	if(orders.get(i).isValid()) {
+        		p.setId(Long.valueOf(1));
+        	}
+        	else {
+        		p.setId(Long.valueOf(0));
+        	}
+        	
+        	totalOrders += p.getPrice() * p.getQuantity();
+        
+        	productsOrder.add(p) ;
         	
         }
         
@@ -140,6 +205,16 @@ public class CardView implements Serializable {
 				accRepo.delete(selected);
 		        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Admin: Category Delete successfully.", null));
 		        redirect("card.xhtml");
+	  }
+	  
+	  public void orderProduct() {
+		        CardRepository accRepo = Context.getContext().getBean(CardRepository.class);
+		        for (int i = 0; i < cards.size(); i++) {
+		        	Card c = cards.get(i); 
+		        	c.setOrderbool(true);
+		        	accRepo.save(c);
+		        }
+		        redirect("orders.xhtml");
 	  }
 	
 	
