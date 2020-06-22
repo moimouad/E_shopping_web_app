@@ -151,7 +151,7 @@ public void setCategory(String category) {
 
 
   
-  public void redirect(String page)
+  public static void redirect(String page)
 	{
 		try{
 			FacesContext fc = FacesContext.getCurrentInstance();
@@ -232,7 +232,7 @@ public void setCategory(String category) {
 	  redirect("products.xhtml");
   }
   
-  public void chose(int i) {
+  public static void chose(int i) {
 	  FacesContext context = FacesContext.getCurrentInstance();
 	  context.getExternalContext().getSessionMap().put("chose",null);
 	  if (i==0) {
@@ -244,6 +244,10 @@ public void setCategory(String category) {
 	  else if (i==2) {
 		  context.getExternalContext().getSessionMap().put("chose","home");
 		  redirect("items.xhtml");
+	  }
+	  else if (i==3) {
+		  context.getExternalContext().getSessionMap().put("chose","card");
+		  redirect("card.xhtml");
 	  }
   }
   

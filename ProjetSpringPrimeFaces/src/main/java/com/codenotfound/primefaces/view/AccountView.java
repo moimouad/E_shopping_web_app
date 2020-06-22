@@ -130,7 +130,7 @@ public class AccountView implements Serializable {
 	    			context.getExternalContext().getSessionMap().put("username",username);
 	    			context.getExternalContext().getSessionMap().put("username",username);
 	    			System.out.println(context.getExternalContext().getSessionMap().get("username"));
-	            	redirect("items.xhtml");
+	    			ProductView.chose(2);
 	            	return;
 	            }
 	        }
@@ -250,7 +250,7 @@ public class AccountView implements Serializable {
 			{
 				System.out.println(e);
 			}
-			redirect("items.xhtml");
+			ProductView.chose(2);
 		}
 		
 		
@@ -265,7 +265,7 @@ public class AccountView implements Serializable {
 		}
 		
 		public void isAdmin() {
-			if(!admin()) redirect("items.xhtml");
+			if(!admin()) ProductView.chose(2);
 		}
 		
 	}

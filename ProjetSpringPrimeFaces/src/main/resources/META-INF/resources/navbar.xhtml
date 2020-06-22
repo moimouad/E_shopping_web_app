@@ -26,11 +26,11 @@
   </c:forEach>
   
   <li class="right" style="#{accountView.loggedin ? '' : 'display:none'}"><h:form><h:commandLink action="orders?faces-redirect=true" value = "orders" onclick="#"/></h:form></li>
-  <li class="right" id="username" style="#{accountView.loggedin ? '' : 'display:none'}"><h:form><h:commandLink action="profile.xhtml" value = "#{accountView.username}"/></h:form></li>
+  <li class="right" id="username" style="#{accountView.loggedin ? '' : 'display:none'}"><h:form><h:commandLink action="#" value = "#{accountView.username}"/></h:form></li>
   <li class="right" style="#{accountView.loggedin ? '' : 'display:none'}"><h:form><h:commandLink action="#{accountView.logout()}" value = "Logout" /></h:form></li>
   <li class="right" style="#{accountView.loggedin ? 'display:none' : ''}"><h:form><h:commandLink action="index.xhtml" value = "Login/Signup"/></h:form></li>
   <li class="right" style="#{accountView.admin() ? '' : 'display:none'}"><h:form><h:commandLink action="#{productView.chose(1)}" value = "Admin Espace"/></h:form></li>
-  <li class = "right" style="#{accountView.loggedin ? '' : 'display:none'}"><h:form><h:commandLink action="card.xhtml" ><span class="fontawesome-shopping-cart"></span><h:outputText value = " #{cardView.total} Dh"></h:outputText></h:commandLink></h:form></li>
+  <li class = "right" style="#{accountView.loggedin ? '' : 'display:none'}"><h:form><h:commandLink action="#{productView.chose(3)}" styleClass= "#{productView.chose.equals('card') ? 'active' : ''}" ><span class="fontawesome-shopping-cart"  ></span><h:outputText value = " #{cardView.total} Dh"></h:outputText></h:commandLink></h:form></li>
   
 </ul>
 
