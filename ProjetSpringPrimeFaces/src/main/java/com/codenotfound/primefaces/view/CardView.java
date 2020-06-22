@@ -72,7 +72,7 @@ public class CardView implements Serializable {
 	public void init() {
 		
 		total = 0;
-		System.out.println("1");
+		
 		FacesContext context = FacesContext.getCurrentInstance();
 		actUser = (String) context.getExternalContext().getSessionMap().get("username");
 		cards = cardRepository.findAll();
