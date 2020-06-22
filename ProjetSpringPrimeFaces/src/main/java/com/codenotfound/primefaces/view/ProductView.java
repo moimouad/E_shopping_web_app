@@ -34,7 +34,18 @@ public class ProductView implements Serializable {
   private String description;
   private int price;
   private int quantity;
-  private String imageUrl;
+  private int quantityS;
+  
+  public int getQuantityS() {
+	return quantityS;
+}
+
+
+public void setQuantityS(int quantityS) {
+	this.quantityS = quantityS;
+}
+
+private String imageUrl;
   private String category;
   
   private String chose = "home";

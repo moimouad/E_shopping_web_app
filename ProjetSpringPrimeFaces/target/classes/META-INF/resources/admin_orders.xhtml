@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:c="http://java.sun.com/jstl/core"
+  xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+  xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+   <f:metadata>
+  	<f:event listener="#{accountView.verifyLoginOnWelcomedummy()}" type="preRenderView"></f:event>
+  	<f:event listener="#{accountView.checkloginstatus()}" type="preRenderView"></f:event>
+  	<f:event listener="#{accountView.isAdmin()}" type="preRenderView"></f:event>
+
+  </f:metadata>
+
+	<link rel="stylesheet" type="text/css" href="resources/css/items.css"/>
+	
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+	<link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet"/>
+	<link href="https://fonts.googleapis.com/css?family=Days+One" rel="stylesheet"/>
+  <title>  Admin Orders </title>
+</h:head>
+
+<h:body>
+
+<ul class="topnav">
+
+  <li><h:form><h:commandLink value="Home" action = "#{productView.chose(2)}" ></h:commandLink></h:form></li> 
+  <li><h:form><h:commandLink value="Categories" action = "admin_categ.xhtml" ></h:commandLink></h:form></li> 
+  <li><h:form><h:commandLink value="Products" action = "admin_prod.xhtml"    ></h:commandLink></h:form></li>
+  <li><h:form><h:commandLink value="Orders" action = "admin_orders.xhtml" styleClass="active"></h:commandLink></h:form></li>    
+  
+  <li class="right" id="username" style="#{accountView.loggedin ? '' : 'display:none'}"><h:form><h:commandLink action="#" value = "#{accountView.username}"/></h:form></li>
+  <li class="right" style="#{accountView.loggedin ? '' : 'display:none'}"><h:form><h:commandLink action="#{accountView.logout()}" value = "Logout" /></h:form></li>
+  <li class="right" style="#{accountView.loggedin ? 'display:none' : ''}"><h:form><h:commandLink action="index.xhtml" value = "Login/Signup"/></h:form></li>
+  <li class="right" style="#{accountView.admin() ? '' : 'display:none'}"><h:form><h:commandLink action="admin_categ.xhtml" value = "Admin Espace" styleClass="active"/></h:form></li>
+  
+</ul>
+
+<!-- Debut Body !!! -->
+
+<p:growl id="messages" showDetail="false"/>
+	
+<h:form>
+
+  <p:dataTable  var="card" value="#{cardView.ordersAdmin}" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" 
+  paginator="true"
+  rows="6"  >
+
+	<p:column headerText="User" style="text-align: center">
+      <h:outputText value="#{card.user}" />
+    </p:column>
+    
+    
+    <p:column headerText="Name of Product" style="text-align: center">
+      <h:outputText value="#{cardView.productById(card.idProd).name}" />
+    </p:column>
+    
+    
+    <p:column headerText="Price" style="text-align: center">
+      <h:outputText value="#{cardView.productById(card.idProd).price}" />
+    </p:column>
+    
+    <p:column headerText="Quantity" style="text-align: center">
+      <h:outputText value="#{card.quantity}" />
+    </p:column>
+    
+    <p:column headerText="Product image" style="text-align: center">
+    	<p:graphicImage url="#{cardView.productById(card.idProd).imageUrl}" style = "width:150px;height:150px "/>
+    </p:column>
+    
+    <p:column headerText="Category" style="text-align: center">
+      <h:outputText value="#{cardView.productById(card.idProd).category}" />
+    </p:column>
+
+    <p:column headerText="Validate" style="text-align: center">
+    	<p:commandButton id="delete"  value="Validate" onclick="PF('deleteitemDialog').show()" >
+	        <f:setPropertyActionListener value="#{card}" target="#{cardView.card}" />
+    	</p:commandButton>
+    </p:column>
+
+  </p:dataTable>
+ </h:form>
+  
+  <br/>
+  <br/>
+<!--  
+    <div align="center">
+          <p:commandButton id="add"  value="Add New product" onclick="PF('additemDialog').show()" icon="ui-icon-pencil" />
+    </div>
+ -->   
+        
+    <h:form>
+      <p:dialog id="deleteItem" header="Validate order" widgetVar="deleteitemDialog" height="50px" resizable="false">
+	  	<p:panelGrid columns="2" columnClasses="label,value">
+	    	<p:commandButton id="confirmDelete" value="OK" action="#{cardView.validateOrder()}" oncomplete="PF('deleteitemDialog').hide()"  icon="ui-icon-check"/>
+	        <p:commandButton id="cancelDelete" value="Cancel" onclick="PF('deleteitemDialog').hide()" icon="ui-icon-cancel"/>
+	    </p:panelGrid>
+	  </p:dialog>
+    </h:form>
+    
+  
+<!-- Fin Body !!! -->
+
+<div class="heading">
+  <h6 class="title-text" style = "font-family: 'Days One', sans-serif;"><span>© 2020 Jee Projet</span></h6>
+  <div class="hline"></div>
+</div>
+
+</h:body>
+</html>

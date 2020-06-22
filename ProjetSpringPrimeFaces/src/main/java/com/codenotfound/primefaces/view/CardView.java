@@ -31,6 +31,8 @@ public class CardView implements Serializable {
 	
 	private List<Card> cards;
 	private List<Card> orders;
+	private List<Card> ordersAdmin;
+
 	private ArrayList<Product> products =  new ArrayList<Product>() ;
 	private ArrayList<Product> productsOrder =  new ArrayList<Product>() ;
 	private Card card = new Card();
@@ -96,6 +98,15 @@ public class CardView implements Serializable {
 	public void setCard(Card card) {
 		this.card = card;
 	}
+	
+	public List<Card> getOrdersAdmin() {
+		return ordersAdmin;
+	}
+
+	public void setOrdersAdmin(List<Card> ordersAdmin) {
+		this.ordersAdmin = ordersAdmin;
+	}
+
 
 	@PostConstruct
 	public void init() {
@@ -107,11 +118,23 @@ public class CardView implements Serializable {
 		actUser = (String) context.getExternalContext().getSessionMap().get("username");
 		cards = cardRepository.findAll();
 		orders = cardRepository.findAll();
+		ordersAdmin = cardRepository.findAll();
 		
 		products.clear();
 		productsOrder.clear();
 		
-		int len = cards.size();
+		int len = ordersAdmin.size();
+		
+        for (int i = 0; i < len ; i++) {
+        	if(ordersAdmin.get(i).isValid() || !ordersAdmin.get(i).isOrderbool()) {
+        		ordersAdmin.remove(i);
+        		i--;
+        		len--;
+        	}
+        }
+		
+        
+        len = cards.size();
         for (int i = 0; i < len; i++) {
         	if(!cards.get(i).getUser().equals(actUser) || cards.get(i).isOrderbool()) {
         		cards.remove(i);
@@ -215,6 +238,22 @@ public class CardView implements Serializable {
 		        	accRepo.save(c);
 		        }
 		        redirect("orders.xhtml");
+	  }
+	  
+	  public Product productById(Long id) {
+		  return (productRepository.findOne(id));
+	  }
+	  
+	  public void validateOrder() {
+		  Product pp = productById(card.getIdProd());
+		  if (pp.getQuantity() >= card.getQuantity()) {
+			  card.setValid(true);
+			  pp.setQuantity(pp.getQuantity()-card.getQuantity());
+			  productRepository.save(pp);
+			  cardRepository.save(card);
+			  redirect("admin_orders.xhtml");
+		  }
+
 	  }
 	
 	
