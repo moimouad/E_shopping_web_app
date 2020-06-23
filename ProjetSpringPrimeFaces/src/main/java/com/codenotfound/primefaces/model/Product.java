@@ -73,6 +73,21 @@ public class Product {
 		super();
 	}
 	
-	
+	public void updateProd(String name, String description, int price, int quantity, String imageUrl, String category) {
+		
+		  if (name != null && !name.equals("")) {
+		       this.setName(name); }	      
+	      if (description != null && !description.equals("")) {
+	    	  this.setDescription(description);	     }	      
+	      if (category != null && !category.equals("")) {
+	    	  this.setCategory(category);	      }	      
+	      if (imageUrl != null && !imageUrl.equals("")) {
+	    	  this.setImageUrl(imageUrl);	     }	      
+	      if (price != 0 ) {
+	    	  this.setPrice(price);	     }	     
+	      if (quantity != 0 ) {
+	    	  this.setQuantity(quantity);	      }
+	      				
+	}
 	
 }
