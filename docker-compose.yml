@@ -44,6 +44,7 @@ services:
 volumes:
   db-data:
 
+
 # Networks to be created to facilitate communication between containers
 networks:
   ProjetSpringPrimeFaces:
