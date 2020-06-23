@@ -2,7 +2,6 @@ package com.codenotfound.primefaces;
 
 import org.junit.Assert;
 import org.junit.*;
-import org.mockito.Mockito;
 
 import com.codenotfound.primefaces.model.Product;
 
@@ -27,8 +26,6 @@ public class JUnitTests {
 	 
 	@Test
 	public void testMethod2() {
-		
-		
-		
+				
 	}
 }

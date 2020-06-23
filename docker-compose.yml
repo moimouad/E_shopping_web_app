@@ -16,9 +16,9 @@ services:
     depends_on:
       - db # This service depends on mysql. Start that first.
     environment: # Pass environment variables to the service
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/test
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/test?useSSL=false&allowPublicKeyRetrieval=true
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: test
+      SPRING_DATASOURCE_PASSWORD: 
     networks: # Networks to join (Services on the same network can communicate with each other using their name)
       - ProjetSpringPrimeFaces
 
@@ -33,8 +33,8 @@ services:
     environment:
       MYSQL_DATABASE: test
       MYSQL_USER: root
-      MYSQL_PASSWORD: test
-      MYSQL_ROOT_PASSWORD: test
+      MYSQL_PASSWORD: 
+      MYSQL_ROOT_PASSWORD: 
     volumes:
       - db-data:/var/lib/mysql
     networks:
